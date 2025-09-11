@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Automotive Installation Assistant Training Test
+PDF Knowledge Assistant Training Test
 
-This script trains and tests an automotive installation assistant using
-PDF-extracted knowledge from installation manuals.
+This script trains and tests a PDF knowledge assistant using
+PDF-extracted content from technical documentation.
 
 The validation uses realistic user questions, NOT questions derived from
-the training manuals (which would be circular testing).
+the training documents (which would be circular testing).
 """
 
 import unsloth  # Import first for optimizations
@@ -23,26 +23,26 @@ if torch.cuda.is_available():
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from talkytalky.model import ModelConfig, LoRAConfig
-from talkytalky.training import TrainingConfig, Trainer
-from talkytalky.evaluation import InferenceEngine
-from talkytalky.data import FormatConverter
+from lfm2sloth.model import ModelConfig, LoRAConfig
+from lfm2sloth.training import TrainingConfig, Trainer
+from lfm2sloth.evaluation import InferenceEngine
+from lfm2sloth.data import FormatConverter
 
 
-def train_automotive_assistant():
-    """Train the automotive installation assistant"""
+def train_pdf_assistant():
+    """Train the PDF knowledge assistant"""
     
-    print("🔧 Training Automotive Installation Assistant...")
+    print("📄 Training PDF Knowledge Assistant...")
     print("=" * 50)
     
     # Paths
     examples_dir = Path(__file__).parent
-    data_file = examples_dir / "data" / "automotive_real_dataset.jsonl"
-    output_dir = examples_dir / "output" / "automotive_assistant"
+    data_file = examples_dir / "data" / "pdf_knowledge_dataset.jsonl"
+    output_dir = examples_dir / "output" / "pdf_assistant"
     
     if not data_file.exists():
         print(f"❌ Training data not found: {data_file}")
-        print("Run: python build_automotive_dataset.py --pdf-dir /path/to/manuals")
+        print("Run: python build_pdf_dataset.py --pdf-dir /path/to/documents")
         return None
     
     # Create output directory

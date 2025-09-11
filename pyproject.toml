@@ -76,16 +76,16 @@ Repository = "https://github.com/your-org/lfm2sloth.git"
 Issues = "https://github.com/your-org/lfm2sloth/issues"
 
 [project.scripts]
-lfm2sloth-train = "talkytalky.cli:train_cli"
-lfm2sloth-convert = "talkytalky.cli:convert_cli"
-lfm2sloth-deploy = "talkytalky.cli:deploy_cli"
+lfm2sloth-train = "lfm2sloth.cli:train_cli"
+lfm2sloth-convert = "lfm2sloth.cli:convert_cli"
+lfm2sloth-deploy = "lfm2sloth.cli:deploy_cli"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/talkytalky"]
+packages = ["src/lfm2sloth"]
 
 [tool.black]
 line-length = 100

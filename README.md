@@ -236,15 +236,15 @@ See `uv run python train.py --help` for all options.
 
 ## Examples & Demonstrations
 
-### Specialized Training Examples
-- **PDF Knowledge Extraction** (`examples/build_automotive_dataset.py`): Extract and train on technical documentation
+### Training Examples
+- **PDF Knowledge Extraction** (`examples/build_pdf_dataset.py`): Extract and train on technical documentation
 - **Conversational AI** (`examples/test_ultrachat_expert.py`): Natural conversation using UltraChat dataset  
 - **Experiment Tracking Demo** (`examples/experiment_tracking_demo.py`): Complete tracking setup examples
 
 ### Run Example Training
 ```bash
-# Train automotive expert from PDF manuals
-uv run python examples/test_automotive_assistant.py
+# Train PDF knowledge assistant from technical documentation
+uv run python examples/test_pdf_assistant.py
 
 # Train conversational model with UltraChat data  
 uv run python examples/test_ultrachat_expert.py

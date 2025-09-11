@@ -13,8 +13,8 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from talkytalky.model import ModelConfig, LoRAConfig
-from talkytalky.training import TrainingConfig, Trainer
+from lfm2sloth.model import ModelConfig, LoRAConfig
+from lfm2sloth.training import TrainingConfig, Trainer
 
 
 def demo_tensorboard_tracking():
