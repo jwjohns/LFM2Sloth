@@ -1,8 +1,8 @@
-# 🗣️ TalkyTalky
+# LFM2Sloth
 
 A modular, task-agnostic AI training pipeline designed for creating specialized conversational models. Built with Unsloth optimization for efficient fine-tuning of language models with comprehensive experiment tracking.
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Setup environment with UV**:
 ```bash
@@ -26,18 +26,18 @@ This will train a small customer service model on sample data and test inference
 uv run python inference_demo.py output/quick_start/merged
 ```
 
-## 📋 Features
+## Features
 
-- **🎯 Task Agnostic**: Configure any training task through modular components
-- **⚡ Unsloth Optimized**: 2-3x faster training with reduced memory usage  
-- **🔧 Modular Design**: Pluggable data, model, training, and evaluation components
-- **📊 Experiment Tracking**: Integrated W&B and TensorBoard support with user choice
-- **🚀 Easy Deployment**: Model merging, quantization, and export utilities
-- **🎨 Multiple Formats**: Support for ChatML, Alpaca, and custom data formats
-- **📄 PDF Knowledge Extraction**: Extract and train on technical documentation
-- **🗂️ Dataset Integration**: Seamless HuggingFace datasets integration
+- **Task Agnostic**: Configure any training task through modular components
+- **Unsloth Optimized**: 2-3x faster training with reduced memory usage  
+- **Modular Design**: Pluggable data, model, training, and evaluation components
+- **Experiment Tracking**: Integrated W&B and TensorBoard support with user choice
+- **Easy Deployment**: Model merging, quantization, and export utilities
+- **Multiple Formats**: Support for ChatML, Alpaca, and custom data formats
+- **PDF Knowledge Extraction**: Extract and train on technical documentation
+- **Dataset Integration**: Seamless HuggingFace datasets integration
 
-## 🏗 Architecture
+## Architecture
 
 ```
 src/talkytalky/
@@ -48,7 +48,7 @@ src/talkytalky/
 └── deployment/    # Model export and deployment utilities
 ```
 
-## 📚 Usage Examples
+## Usage Examples
 
 ### Basic Training
 
@@ -66,7 +66,7 @@ uv run python train.py --train_data data/train.jsonl --load_in_4bit --num_epochs
 ### Data Conversion
 
 ```python
-from talkytalky.data import FormatConverter
+from lfm2sloth.data import FormatConverter
 
 # Convert CSV to training format
 FormatConverter.csv_to_jsonl(
@@ -80,7 +80,7 @@ FormatConverter.csv_to_jsonl(
 ### Custom Training Configuration
 
 ```python
-from talkytalky import ModelConfig, LoRAConfig, TrainingConfig, Trainer
+from lfm2sloth import ModelConfig, LoRAConfig, TrainingConfig, Trainer
 
 # Configure model
 model_config = ModelConfig(
@@ -113,7 +113,7 @@ trainer.train(train_dataset, eval_dataset)
 ### Inference
 
 ```python
-from talkytalky.evaluation import InferenceEngine
+from lfm2sloth.evaluation import InferenceEngine
 
 # Load trained model
 engine = InferenceEngine("path/to/model")
@@ -127,7 +127,7 @@ response = engine.chat(
 
 ### Experiment Tracking
 
-TalkyTalky provides integrated experiment tracking with support for both Weights & Biases and TensorBoard:
+LFM2Sloth provides integrated experiment tracking with support for both Weights & Biases and TensorBoard:
 
 ```python
 # TensorBoard tracking
@@ -163,7 +163,7 @@ tensorboard --logdir runs/
 # W&B - visit https://wandb.ai/your-username/your-project
 ```
 
-## 🎛 Configuration Files
+## Configuration Files
 
 Use JSON configuration files to define training tasks:
 
@@ -192,10 +192,10 @@ Use JSON configuration files to define training tasks:
 
 See `config/` directory for complete examples.
 
-## 📦 Deployment
+## Deployment
 
 ```python
-from talkytalky.deployment import ModelDeployer
+from lfm2sloth.deployment import ModelDeployer
 
 deployer = ModelDeployer("path/to/adapter")
 
@@ -215,7 +215,7 @@ deployer.create_deployment_package(
 )
 ```
 
-## 🔧 Command Line Interface
+## Command Line Interface
 
 The main training script supports extensive configuration:
 
@@ -234,12 +234,11 @@ uv run python train.py \\
 
 See `uv run python train.py --help` for all options.
 
-## 🎯 Examples & Demonstrations
+## Examples & Demonstrations
 
 ### Specialized Training Examples
 - **PDF Knowledge Extraction** (`examples/build_automotive_dataset.py`): Extract and train on technical documentation
 - **Conversational AI** (`examples/test_ultrachat_expert.py`): Natural conversation using UltraChat dataset  
-- **Domain Experts** (`examples/test_yellowstone_expert.py`): Specialized knowledge with signature phrases
 - **Experiment Tracking Demo** (`examples/experiment_tracking_demo.py`): Complete tracking setup examples
 
 ### Run Example Training
@@ -254,13 +253,13 @@ uv run python examples/test_ultrachat_expert.py
 uv run python examples/experiment_tracking_demo.py
 ```
 
-## 📊 Model Support
+## Model Support
 
 Currently optimized for:
 - **LiquidAI/LFM2-1.2B** (primary target)
 - Other Hugging Face compatible models (experimental)
 
-## 🔍 Data Formats
+## Data Formats
 
 ### ChatML Format (Recommended)
 ```json
@@ -280,25 +279,25 @@ Currently optimized for:
 }
 ```
 
-## 🚀 Performance
+## Performance
 
 LFM2Sloth leverages Unsloth optimizations for:
 - **2-3x faster training** compared to standard methods
 - **Reduced memory usage** enabling larger batch sizes
 - **Efficient LoRA implementation** for quick fine-tuning
 
-## 🤝 Contributing
+## Contributing
 
 This is an open-source project built on top of Unsloth and Liquid AI's models. Contributions welcome!
 
-## 📄 License
+## License
 
 This project is open source. Please respect the licensing terms of:
 - Unsloth (Apache 2.0)
 - LiquidAI models (LFM Open License v1.0)
 - Hugging Face Transformers (Apache 2.0)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Unsloth AI](https://github.com/unslothai/unsloth) for the optimization framework
 - [Liquid AI](https://liquid.ai) for the LFM2 models
