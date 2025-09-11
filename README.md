@@ -1,6 +1,30 @@
 # LFM2Sloth
 
-A modular, task-agnostic AI training pipeline designed for creating specialized conversational models. Built with Unsloth optimization for efficient fine-tuning of language models with comprehensive experiment tracking.
+<div align="center">
+
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+[![GPU](https://img.shields.io/badge/GPU-CUDA%20Required-orange.svg)](https://developer.nvidia.com/cuda-downloads)
+[![Model](https://img.shields.io/badge/Model-LiquidAI%20LFM2--1.2B-purple.svg)](https://huggingface.co/LiquidAI/LFM2-1.2B)
+[![Framework](https://img.shields.io/badge/Framework-Unsloth-red.svg)](https://github.com/unslothai/unsloth)
+
+**A modular, task-agnostic AI training pipeline for rapid fine-tuning**
+
+*Built with Unsloth optimization • 2-3x faster training • Reduced memory usage*
+
+---
+
+| Component | Version | Purpose |
+|-----------|---------|---------|
+| **LiquidAI LFM2** | 1.2B | Base language model |
+| **Unsloth** | 2024.11+ | Training optimization |
+| **Transformers** | 4.55+ | Model infrastructure |
+| **PEFT** | 0.7+ | Parameter-efficient fine-tuning |
+| **Python** | 3.10+ | Runtime environment |
+
+</div>
+
+---
 
 ## Quick Start
 
