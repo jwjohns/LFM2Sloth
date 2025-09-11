@@ -2,7 +2,7 @@
 """
 Experiment Tracking Demo
 
-This script demonstrates how to use TalkyTalky's experiment tracking features
+This script demonstrates how to use LFM2Sloth's experiment tracking features
 with both Weights & Biases and TensorBoard.
 """
 
@@ -46,9 +46,9 @@ def demo_tensorboard_tracking():
         # TensorBoard tracking configuration
         tracking_provider="tensorboard",
         experiment_name="demo_tensorboard_experiment",
-        project_name="talkytalky-demos",
+        project_name="lfm2sloth-demos",
         tracking_tags=["demo", "tensorboard"],
-        tracking_notes="Demonstration of TensorBoard integration with TalkyTalky",
+        tracking_notes="Demonstration of TensorBoard integration with LFM2Sloth",
         log_model_artifacts=True,
     )
     
@@ -108,9 +108,9 @@ def demo_wandb_tracking():
         # W&B tracking configuration
         tracking_provider="wandb",
         experiment_name="demo_wandb_experiment",
-        project_name="talkytalky-demos",
+        project_name="lfm2sloth-demos",
         tracking_tags=["demo", "wandb"],
-        tracking_notes="Demonstration of W&B integration with TalkyTalky",
+        tracking_notes="Demonstration of W&B integration with LFM2Sloth",
         log_model_artifacts=True,
         wandb_api_key=wandb_key,  # Or omit to use environment variable
     )
@@ -157,7 +157,7 @@ def demo_both_tracking():
         # Combined tracking configuration
         tracking_provider="both",  # This enables both TensorBoard and W&B
         experiment_name="demo_combined_experiment",
-        project_name="talkytalky-demos",
+        project_name="lfm2sloth-demos",
         tracking_tags=["demo", "combined", "tensorboard", "wandb"],
         tracking_notes="Demonstration of combined TensorBoard + W&B integration",
         log_model_artifacts=True,
@@ -180,7 +180,7 @@ def demo_both_tracking():
 def main():
     """Run experiment tracking demonstrations"""
     
-    print("🧪 TalkyTalky Experiment Tracking Demonstrations")
+    print("🧪 LFM2Sloth Experiment Tracking Demonstrations")
     print("=" * 60)
     print()
     

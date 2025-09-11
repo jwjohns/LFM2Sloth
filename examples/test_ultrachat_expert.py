@@ -141,7 +141,7 @@ def train_ultrachat_expert():
         # Experiment tracking configuration
         tracking_provider="tensorboard",  # Options: "none", "wandb", "tensorboard", "both"
         experiment_name="ultrachat_conversational_assistant",
-        project_name="talkytalky-experiments",
+        project_name="lfm2sloth-experiments",
         tracking_tags=["ultrachat", "conversational", "assistant"],
         tracking_notes="Training conversational assistant with UltraChat 200k dataset",
         log_model_artifacts=True,
