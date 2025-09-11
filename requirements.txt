@@ -1,0 +1,33 @@
+# Core training dependencies
+unsloth>=2024.11
+transformers>=4.55
+datasets>=2.14
+peft>=0.7
+trl>=0.7
+bitsandbytes>=0.41
+
+# Data processing
+pandas>=2.0
+jsonlines>=4.0
+
+# Utilities
+accelerate>=0.25
+sentencepiece>=0.1.99
+protobuf>=4.21
+torch>=2.1
+numpy>=1.24
+tqdm>=4.65
+
+# Configuration and logging
+pyyaml>=6.0
+python-dotenv>=1.0
+
+# Experiment tracking (optional)
+wandb>=0.16
+tensorboard>=2.14
+
+# Development
+pytest>=7.0
+black>=23.0
+isort>=5.12
+flake8>=6.0

@@ -1,0 +1,177 @@
+[project]
+name = "lfm2sloth"
+version = "0.1.0"
+description = "A modular, task-agnostic training pipeline for Liquid AI's LFM2 models using Unsloth optimization"
+authors = [
+    {name = "LFM2Sloth Team", email = "team@lfm2sloth.dev"}
+]
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+keywords = ["machine-learning", "llm", "fine-tuning", "unsloth", "liquid-ai", "lora"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    # Core training dependencies
+    "unsloth>=2024.11",
+    "transformers>=4.55",
+    "datasets>=2.14",
+    "peft>=0.7",
+    "trl>=0.7",
+    "bitsandbytes>=0.41",
+    # Data processing
+    "pandas>=2.0",
+    "jsonlines>=4.0",
+    # Utilities
+    "accelerate>=0.25",
+    "sentencepiece>=0.1.99",
+    "protobuf>=4.21",
+    "torch>=2.1",
+    "numpy>=1.24",
+    "tqdm>=4.65",
+    # Configuration and logging
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "pypdf2>=3.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "isort>=5.12",
+    "flake8>=6.0",
+    "mypy>=1.0",
+]
+
+wandb = [
+    "wandb>=0.16",
+]
+
+onnx = [
+    "onnx>=1.14",
+    "onnxruntime>=1.16",
+]
+
+all = [
+    "lfm2sloth[dev,wandb,onnx]",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/lfm2sloth"
+Documentation = "https://github.com/your-org/lfm2sloth/blob/main/README.md"
+Repository = "https://github.com/your-org/lfm2sloth.git"
+Issues = "https://github.com/your-org/lfm2sloth/issues"
+
+[project.scripts]
+lfm2sloth-train = "talkytalky.cli:train_cli"
+lfm2sloth-convert = "talkytalky.cli:convert_cli"
+lfm2sloth-deploy = "talkytalky.cli:deploy_cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/talkytalky"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "unsloth.*",
+    "bitsandbytes.*",
+    "peft.*",
+    "trl.*",
+    "transformers.*",
+    "datasets.*",
+    "accelerate.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "-ra",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "gpu: marks tests that require GPU",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
