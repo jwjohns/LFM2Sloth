@@ -4,13 +4,15 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
-[![GPU](https://img.shields.io/badge/GPU-CUDA%20Required-orange.svg)](https://developer.nvidia.com/cuda-downloads)
+[![GPU](https://img.shields.io/badge/GPU-CUDA%20%7C%20Apple%20Silicon-orange.svg)](https://developer.nvidia.com/cuda-downloads)
 [![Model](https://img.shields.io/badge/Model-LiquidAI%20LFM2--1.2B-purple.svg)](https://huggingface.co/LiquidAI/LFM2-1.2B)
 [![Framework](https://img.shields.io/badge/Framework-Unsloth-red.svg)](https://github.com/unslothai/unsloth)
 
 **A modular, task-agnostic AI training pipeline for rapid fine-tuning**
 
-*Built with Unsloth optimization • 2-3x faster training • Reduced memory usage*
+*Built with Unsloth optimization • 2-3x faster training • Cross-platform support • Advanced evaluation*
+
+> 💡 **New:** [Advanced Math Training Guide](docs/ADVANCED_MATH_TRAINING.md) - Train models achieving 60% on GSM8K with combined datasets and official benchmarking
 
 ---
 
@@ -52,6 +54,9 @@ uv run python inference_demo.py output/quick_start/merged
 
 ## Features
 
+- **Cross-Platform**: CUDA (NVIDIA), Apple Silicon (MPS), and CPU support with automatic device detection
+- **Mathematical Reasoning**: Advanced training for math problems with 60% GSM8K accuracy achievement
+- **Official Benchmarking**: LM Evaluation Harness integration with format adapters for accurate evaluation
 - **Task Agnostic**: Configure any training task through modular components
 - **Unsloth Optimized**: 2-3x faster training with reduced memory usage  
 - **Modular Design**: Pluggable data, model, training, and evaluation components
@@ -261,20 +266,29 @@ See `uv run python train.py --help` for all options.
 ## Examples & Demonstrations
 
 ### Training Examples
+- **Mathematical Reasoning** (`examples/train_combined_math_expert.py`): Train on GSM8K + Nemotron for 60% accuracy
+- **Cross-Platform Testing** (`examples/test_apple_silicon.py`): Verify Apple Silicon (MPS) compatibility
+- **Official Benchmarking** (`examples/test_gsm8k_benchmark.py`): LM Evaluation Harness integration
 - **PDF Knowledge Extraction** (`examples/build_pdf_dataset.py`): Extract and train on technical documentation
 - **Conversational AI** (`examples/test_ultrachat_expert.py`): Natural conversation using UltraChat dataset  
 - **Experiment Tracking Demo** (`examples/experiment_tracking_demo.py`): Complete tracking setup examples
 
 ### Run Example Training
 ```bash
+# Train mathematical reasoning model with combined datasets
+uv run python examples/train_combined_math_expert.py
+
+# Test Apple Silicon compatibility (M1/M2/M3 Macs)
+uv run python examples/test_apple_silicon.py
+
+# Evaluate with official GSM8K benchmarks
+uv run python examples/test_gsm8k_benchmark.py
+
 # Train PDF knowledge assistant from technical documentation
 uv run python examples/test_pdf_assistant.py
 
 # Train conversational model with UltraChat data  
 uv run python examples/test_ultrachat_expert.py
-
-# Experiment tracking demonstrations
-uv run python examples/experiment_tracking_demo.py
 ```
 
 ## Model Support
