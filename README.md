@@ -338,12 +338,12 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 
 ### Areas We Welcome Contributions
 
-- 🤖 **New Model Support**: Additional base models and architectures
-- 🍎 **Cross-Platform**: Better Apple Silicon and CPU optimization  
-- 📊 **Evaluation**: New benchmarks and evaluation metrics
-- 📚 **Documentation**: Examples, tutorials, and API docs
-- 🐛 **Bug Fixes**: Performance improvements and compatibility issues
-- 🧮 **Math Training**: Advanced techniques for mathematical reasoning
+- **New Model Support**: Additional base models and architectures
+- **Cross-Platform**: Better Apple Silicon and CPU optimization  
+- **Evaluation**: New benchmarks and evaluation metrics
+- **Documentation**: Examples, tutorials, and API docs
+- **Bug Fixes**: Performance improvements and compatibility issues
+- **Math Training**: Advanced techniques for mathematical reasoning
 
 See our [Contributing Guide](CONTRIBUTING.md) for complete details on development setup, coding standards, and the pull request process.
 
