@@ -109,6 +109,7 @@ class TrainingConfig:
         # Set TensorFlow 32-bit precision if not specified
         if self.tf32 is None:
             import torch
+            # Enable TF32 only on CUDA devices (not MPS or CPU)
             if torch.cuda.is_available():
                 self.tf32 = True
         

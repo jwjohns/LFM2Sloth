@@ -7,6 +7,10 @@ from unsloth import FastLanguageModel
 import torch
 
 from .config import ModelConfig, LoRAConfig
+from ..utils.device import get_memory_stats
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ModelLoader:
@@ -117,15 +121,17 @@ class ModelLoader:
             "total_params": self._count_parameters(trainable_only=False),
         }
         
-        # Add memory usage if available
-        if torch.cuda.is_available() and hasattr(self._model, 'device'):
-            if str(self._model.device).startswith('cuda'):
-                memory_allocated = torch.cuda.memory_allocated(self._model.device)
-                memory_reserved = torch.cuda.memory_reserved(self._model.device)
+        # Add memory usage (cross-platform)
+        try:
+            stats = get_memory_stats()
+            if stats:
                 info.update({
-                    "gpu_memory_allocated": f"{memory_allocated / 1024**3:.2f} GB",
-                    "gpu_memory_reserved": f"{memory_reserved / 1024**3:.2f} GB",
+                    "device_memory_allocated": f"{stats.get('allocated', 0):.2f} GB",
+                    "device_memory_reserved": f"{stats.get('reserved', 0):.2f} GB",
+                    "device_memory_total": f"{stats.get('total', 0):.2f} GB",
                 })
+        except Exception as e:
+            logger.debug(f"Could not get memory stats: {e}")
         
         return info
     

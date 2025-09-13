@@ -41,10 +41,13 @@ dependencies = [
     "torch>=2.1",
     "numpy>=1.24",
     "tqdm>=4.65",
+    "psutil>=5.9",  # For cross-platform memory monitoring
     # Configuration and logging
     "pyyaml>=6.0",
     "python-dotenv>=1.0",
     "pypdf2>=3.0.1",
+    "tensorboard>=2.20.0",
+    "lm-eval>=0.4.9.1",
 ]
 
 [project.optional-dependencies]
