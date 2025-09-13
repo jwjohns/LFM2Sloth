@@ -30,26 +30,50 @@
 
 ## Quick Start
 
-1. **Setup environment with UV**:
+### Platform-Specific Setup
+
+**For CUDA/NVIDIA GPUs (Linux/Windows):**
 ```bash
 # Install UV if you haven't already
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Create virtual environment and install dependencies
-uv sync
+# Install with CUDA support
+uv sync --extra cuda-full
 ```
 
-2. **Run the quick start example**:
+**For Apple Silicon (M1/M2/M3 Macs):**
 ```bash
-cd examples
-uv run python quick_start.py
+# Install UV if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install with MLX support (Unsloth not available on Apple Silicon)
+uv sync --extra mlx-full
 ```
 
-This will train a small customer service model on sample data and test inference.
+### Run Examples
 
-3. **Try the trained model**:
+**CUDA/NVIDIA:**
 ```bash
-uv run python inference_demo.py output/quick_start/merged
+# Standard training with Unsloth optimization
+uv run python train.py --train_data data/train.jsonl --eval_data data/val.jsonl
+
+# Quick start example
+uv run python examples/quick_start.py
+```
+
+**Apple Silicon:**
+```bash
+# MLX training example
+uv run python examples/train_with_mlx.py
+
+# Or use MLX CLI directly
+python -m mlx_lm.lora \
+  --model LiquidAI/LFM2-1.2B \
+  --train \
+  --data ./data \
+  --batch-size 1 \
+  --num-layers 4 \
+  --iters 100
 ```
 
 ## Features

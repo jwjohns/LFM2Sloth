@@ -1,9 +1,15 @@
 """Model loading utilities"""
 
-import unsloth  # Import unsloth first for optimizations
+try:
+    import unsloth  # Import unsloth first for optimizations
+    from unsloth import FastLanguageModel
+    _HAS_UNSLOTH = True
+except ImportError:
+    _HAS_UNSLOTH = False
+    FastLanguageModel = None
+
 from typing import Tuple, Optional, Any
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from unsloth import FastLanguageModel
 import torch
 
 from .config import ModelConfig, LoRAConfig
@@ -23,6 +29,9 @@ class ModelLoader:
     
     def load_with_unsloth(self, lora_config: Optional[LoRAConfig] = None) -> Tuple[Any, Any]:
         """Load model and tokenizer using Unsloth optimizations"""
+        
+        if not _HAS_UNSLOTH:
+            raise ImportError("Unsloth is not available. Install with: uv sync --extra cuda")
         
         # Build kwargs for FastLanguageModel
         kwargs = {

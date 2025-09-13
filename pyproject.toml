@@ -25,12 +25,12 @@ classifiers = [
 
 dependencies = [
     # Core training dependencies
-    "unsloth>=2024.11",
+    # "unsloth>=2024.11",  # Requires bitsandbytes, not available on Apple Silicon
     "transformers>=4.55",
     "datasets>=2.14",
     "peft>=0.7",
     "trl>=0.7",
-    "bitsandbytes>=0.41",
+    # "bitsandbytes>=0.41",  # Not available on Apple Silicon
     # Data processing
     "pandas>=2.0",
     "jsonlines>=4.0",
@@ -59,17 +59,39 @@ dev = [
     "mypy>=1.0",
 ]
 
+# CUDA/NVIDIA GPU support (Linux/Windows)
+cuda = [
+    "unsloth>=2024.11",
+    "bitsandbytes>=0.41",
+]
+
+# Apple Silicon support (macOS M1/M2/M3)
+mlx = [
+    "mlx-lm>=0.14",
+]
+
+# Experiment tracking
 wandb = [
     "wandb>=0.16",
 ]
 
+# Model export formats
 onnx = [
     "onnx>=1.14",
     "onnxruntime>=1.16",
 ]
 
+# Platform-specific bundles
+cuda-full = [
+    "lfm2sloth[cuda,wandb,onnx,dev]",
+]
+
+mlx-full = [
+    "lfm2sloth[mlx,wandb,onnx,dev]",
+]
+
 all = [
-    "lfm2sloth[dev,wandb,onnx]",
+    "lfm2sloth[cuda,mlx,wandb,onnx,dev]",
 ]
 
 [project.urls]
