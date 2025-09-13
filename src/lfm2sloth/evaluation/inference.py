@@ -7,6 +7,7 @@ from pathlib import Path
 import logging
 
 from ..model.loader import load_model_for_inference
+from ..utils.device import get_memory_stats, get_optimal_device
 
 
 logger = logging.getLogger(__name__)
@@ -105,13 +106,16 @@ class InferenceEngine:
             self.tokenizer.pad_token = self.tokenizer.eos_token
     
     def _log_model_info(self):
-        """Log model information"""
+        """Log model information (cross-platform)"""
         if hasattr(self.model, 'device'):
             logger.info(f"Model device: {self.model.device}")
         
-        if torch.cuda.is_available():
-            memory_allocated = torch.cuda.memory_allocated() / 1024**3
-            logger.info(f"GPU memory allocated: {memory_allocated:.2f} GB")
+        try:
+            stats = get_memory_stats()
+            if stats and stats.get('allocated', 0) > 0:
+                logger.info(f"Device memory allocated: {stats['allocated']:.2f} GB")
+        except Exception as e:
+            logger.debug(f"Could not get memory stats: {e}")
     
     def generate(
         self,
@@ -247,12 +251,16 @@ class InferenceEngine:
             "generation_config": self.generation_config.copy()
         }
         
-        if torch.cuda.is_available():
-            memory_allocated = torch.cuda.memory_allocated() / 1024**3
-            memory_reserved = torch.cuda.memory_reserved() / 1024**3
-            info.update({
-                "gpu_memory_allocated": f"{memory_allocated:.2f} GB",
-                "gpu_memory_reserved": f"{memory_reserved:.2f} GB",
-            })
+        # Add memory stats (cross-platform)
+        try:
+            stats = get_memory_stats()
+            if stats:
+                info.update({
+                    "device_memory_allocated": f"{stats.get('allocated', 0):.2f} GB",
+                    "device_memory_reserved": f"{stats.get('reserved', 0):.2f} GB",
+                    "device_memory_total": f"{stats.get('total', 0):.2f} GB",
+                })
+        except Exception as e:
+            logger.debug(f"Could not get memory stats: {e}")
         
         return info

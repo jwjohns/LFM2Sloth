@@ -8,6 +8,8 @@ import torch
 from datasets import Dataset
 from trl import SFTTrainer
 from transformers import TrainerCallback, TrainerState, TrainerControl
+
+from ..utils.device import get_memory_stats, clear_memory_cache, get_optimal_device, log_device_summary
 import logging
 
 from ..data import DataProcessor
@@ -333,17 +335,24 @@ class Trainer:
         return eval_results
     
     def get_memory_usage(self) -> Dict[str, str]:
-        """Get current GPU memory usage"""
-        if not torch.cuda.is_available():
-            return {"status": "CUDA not available"}
-        
-        memory_allocated = torch.cuda.memory_allocated() / 1024**3
-        memory_reserved = torch.cuda.memory_reserved() / 1024**3
-        memory_total = torch.cuda.get_device_properties(0).total_memory / 1024**3
-        
-        return {
-            "allocated": f"{memory_allocated:.2f} GB",
-            "reserved": f"{memory_reserved:.2f} GB", 
-            "total": f"{memory_total:.2f} GB",
-            "utilization": f"{(memory_reserved/memory_total)*100:.1f}%"
-        }
+        """Get current GPU/device memory usage (cross-platform)"""
+        try:
+            stats = get_memory_stats()
+            if not stats:
+                return {"status": "Memory stats not available"}
+            
+            result = {
+                "allocated": f"{stats.get('allocated', 0):.2f} GB",
+                "reserved": f"{stats.get('reserved', 0):.2f} GB",
+                "total": f"{stats.get('total', 0):.2f} GB",
+            }
+            
+            # Calculate utilization if total is available
+            total = stats.get('total', 0)
+            reserved = stats.get('reserved', 0)
+            if total > 0:
+                result["utilization"] = f"{(reserved/total)*100:.1f}%"
+            
+            return result
+        except Exception as e:
+            return {"status": f"Memory stats error: {e}"}
