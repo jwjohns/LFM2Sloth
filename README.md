@@ -326,7 +326,26 @@ LFM2Sloth leverages Unsloth optimizations for:
 
 ## Contributing
 
-This is an open-source project built on top of Unsloth and Liquid AI's models. Contributions welcome!
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or sharing examples, your contributions help make LFM2Sloth better for everyone.
+
+### Quick Start for Contributors
+
+1. **Fork the repository** and clone your fork
+2. **Set up development environment**: `uv sync --extra dev`
+3. **Read our [Contributing Guide](CONTRIBUTING.md)** for detailed instructions
+4. **Test your changes** on both CUDA and Apple Silicon if possible
+5. **Submit a pull request** with clear description
+
+### Areas We Welcome Contributions
+
+- 🤖 **New Model Support**: Additional base models and architectures
+- 🍎 **Cross-Platform**: Better Apple Silicon and CPU optimization  
+- 📊 **Evaluation**: New benchmarks and evaluation metrics
+- 📚 **Documentation**: Examples, tutorials, and API docs
+- 🐛 **Bug Fixes**: Performance improvements and compatibility issues
+- 🧮 **Math Training**: Advanced techniques for mathematical reasoning
+
+See our [Contributing Guide](CONTRIBUTING.md) for complete details on development setup, coding standards, and the pull request process.
 
 ## License
 
