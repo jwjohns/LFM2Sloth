@@ -5,7 +5,7 @@ Supports CUDA (NVIDIA), MPS (Apple Silicon), and CPU backends
 
 import torch
 import logging
-from typing import str, Dict, Any, Optional
+from typing import Dict, Any, Optional
 
 logger = logging.getLogger(__name__)
 
